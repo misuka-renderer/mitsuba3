@@ -22,6 +22,10 @@ jobs:
     timeout-minutes: 180
 
     steps:
+      - name: Disable symlink materialization (Windows)
+        if: runner.os == 'Windows'
+        run: git config --global core.symlinks false
+
       - uses: Wandalen/wretry.action@v1.2.0
         with:
           action: actions/checkout@v3
